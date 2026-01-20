@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>.history-table{width:100%;border-collapse:collapse}.history-table th,.history-table td{padding:8px;border:1px solid #e6eef9;text-align:left}</style>
+</head>
+<body>
+<div class="container">
+    <h2>Prediction History (recent)</h2>
+    <canvas id="probChart" width="600" height="140"></canvas>
+
+    <h3>Entries</h3>
+    <table class="history-table">
+        <thead><tr><th>Time</th><th>Probability</th><th>Risk</th><th>Summary</th></tr></thead>
+        <tbody>
+        {% for ts,prob,risk,summary in rows %}
+            <tr>
+                <td>{{ ts }}</td>
+                <td>{{ '%.1f'|format(prob*100) if prob else '' }}%</td>
+                <td>{{ risk }}</td>
+                <td>{{ summary }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn" href="{{ url_for('dashboard') }}">Go Back to Dashboard</a>
+</div>
+
+<script>
+const data = {
+  labels: [ {% for ts,prob,risk,summary in rows %}'{{ ts }}',{% endfor %} ],
+  datasets: [{
+    label: 'Risk probability',
+    data: [ {% for ts,prob,risk,summary in rows %}{{ prob if prob else 'null' }},{% endfor %} ],
+    borderColor: '#2563eb',
+    backgroundColor: 'rgba(37,99,235,0.1)',
+    tension: 0.3
+  }]
+};
+const cfg = {type:'line',data:data,options:{scales:{y:{suggestedMin:0,suggestedMax:1}}}};
+new Chart(document.getElementById('probChart'), cfg);
+</script>
+
+</body>
+</html>

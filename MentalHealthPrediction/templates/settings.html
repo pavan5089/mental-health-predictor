@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Mental Health Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Fixed Top Navbar -->
+    <nav class="top-navbar">
+        <div class="navbar-content">
+            <div class="navbar-left">
+                <div class="logo-container">
+                    <i class="fas fa-brain logo-icon"></i>
+                    <span class="project-title">Mental Health Predictor</span>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <div class="user-profile-menu">
+                    <i class="fas fa-user-circle user-icon"></i>
+                    <span class="username-text">{{ current_user.username }}</span>
+                    <a href="{{ url_for('logout') }}" class="logout-link">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-wrapper">
+        <!-- Left Sidebar -->
+        <aside class="left-sidebar">
+            <nav class="sidebar-nav">
+                <a href="{{ url_for('dashboard') }}" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="{{ url_for('home') }}" class="nav-link">
+                    <i class="fas fa-clipboard-check"></i>
+                    <span>Assessment</span>
+                </a>
+                <a href="{{ url_for('history') }}" class="nav-link">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </a>
+                <a href="{{ url_for('resources') }}" class="nav-link">
+                    <i class="fas fa-book-medical"></i>
+                    <span>Mental Health Resources</span>
+                </a>
+                <a href="{{ url_for('settings') }}" class="nav-link active">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content-area">
+            <div class="content-header">
+                <h1 class="welcome-title">Settings</h1>
+                <p class="welcome-subtitle">Manage your account and preferences</p>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-user"></i> Account Information
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="settings-list">
+                        <div class="setting-item">
+                            <i class="fas fa-user-tag"></i>
+                            <div>
+                                <h4>Username</h4>
+                                <p>{{ current_user.username }}</p>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>{{ current_user.email }}</p>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <i class="fas fa-id-card"></i>
+                            <div>
+                                <h4>User ID</h4>
+                                <p>{{ current_user.id }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-shield-alt"></i> Privacy & Data
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <p>Your prediction history is stored locally and securely. All data is anonymized and used only for providing you with mental health insights.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Fixed Footer -->
+    <footer class="dashboard-footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>&copy; 2026 Mental Health Predictor. All rights reserved.</p>
+            </div>
+            <div class="footer-right">
+                <a href="#privacy">Privacy Policy</a>
+                <span>|</span>
+                <a href="#terms">Terms of Service</a>
+                <span>|</span>
+                <a href="#contact">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

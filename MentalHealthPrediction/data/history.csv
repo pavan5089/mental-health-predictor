@@ -1,0 +1,21 @@
+timestamp,probability,risk_label,summary
+1767556701,0.27615223646374476,Low Risk,Academic Pressure=2.0,Work Pressure=3.0,Study Satisfaction=3.0,Financial Stress=3.0
+1767556751,0.6539422436518627,Moderate Risk,Academic Pressure=4.0,Work Pressure=3.0,Study Satisfaction=4.0,Financial Stress=4.0
+1767556859,0.5771032882566716,Moderate Risk,Academic Pressure=4.0,Work Pressure=3.0,Study Satisfaction=4.0,Financial Stress=3.0
+1767557296,0.6033319798956363,Moderate Risk,Academic Pressure=4.0,Work Pressure=3.0,Study Satisfaction=3.0,Financial Stress=3.0
+1767558019,0.4953127898339844,Moderate Risk,Academic Pressure=3.0,Work Pressure=4.0,Study Satisfaction=2.0,Financial Stress=3.0
+1767558236,0.4426814964723302,Moderate Risk,Academic Pressure=3.0,Work Pressure=3.0,Study Satisfaction=4.0,Financial Stress=3.0
+1767558268,0.8042597544200685,High Risk,Academic Pressure=5.0,Work Pressure=5.0,Study Satisfaction=1.0,Financial Stress=5.0
+1767629235,0.25593130795869923,Low Risk,Academic Pressure=1.0,Work Pressure=1.0,Study Satisfaction=4.0,Financial Stress=4.0
+1767629315,0.7183855915426713,High Risk,Academic Pressure=5.0,Work Pressure=4.0,Study Satisfaction=1.0,Financial Stress=4.0
+1768929843,0.20947219302915238,Low Risk,Academic Pressure=1.0,Work Pressure=1.0,Study Satisfaction=0,Financial Stress=1.0
+1768929924,0.7838117106115545,High Risk,Academic Pressure=5.0,Work Pressure=4.0,Study Satisfaction=0,Financial Stress=5.0
+1768930099,0.7838117106115545,High Risk,Academic Pressure=5.0,Work Pressure=4.0,Study Satisfaction=0,Financial Stress=5.0
+1768931091,0.4908540019140545,Moderate Risk,Academic Pressure=3.0,Work Pressure=3.0,Study Satisfaction=0,Financial Stress=3.0
+1,1768932272,0.18854838680807146,Low Risk,Academic Pressure=2.0,Work Pressure=2.0,Study Satisfaction=0,Financial Stress=1.0
+1,1768939536,0.21662677331525138,Low Risk,Academic Pressure=1.0,Work Pressure=2.0,Study Satisfaction=0,Financial Stress=3.0
+1,1768939588,0.7386003513791963,High Risk,Academic Pressure=5.0,Work Pressure=5.0,Study Satisfaction=0,Financial Stress=4.0
+1,1768941125,0.5130566351725074,Moderate Risk,Academic Pressure=3.0,Work Pressure=3.0,Study Satisfaction=0,Financial Stress=3.0
+2,1768941419,0.503638566977863,Moderate Risk,Academic Pressure=3.0,Work Pressure=2.0,Study Satisfaction=0,Financial Stress=3.0
+2,1768942171,0.6899891921698575,High Risk,Academic Pressure=4.0,Work Pressure=2.0,Study Satisfaction=0,Financial Stress=4.0
+2,1768942256,0.5007990915810477,Moderate Risk,Academic Pressure=3.0,Work Pressure=3.0,Study Satisfaction=0,Financial Stress=3.0

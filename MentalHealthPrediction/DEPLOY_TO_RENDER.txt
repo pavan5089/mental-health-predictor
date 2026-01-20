@@ -1,0 +1,70 @@
+================================================================================
+                    DEPLOY TO RENDER - SIMPLE STEPS
+================================================================================
+
+📋 WHAT YOU NEED TO DO:
+
+STEP 1: MAKE SURE CODE IS ON GITHUB
+   → If not, follow SIMPLE_GUIDE.md first
+   → Your code must be pushed to GitHub
+
+STEP 2: GO TO RENDER.COM
+   → Visit: https://render.com
+   → Sign up (use GitHub - easiest!)
+
+STEP 3: CREATE WEB SERVICE
+   → Click "New +" → "Web Service"
+   → Connect your GitHub repository
+   → Select: mental-health-predictor
+
+STEP 4: CONFIGURE SETTINGS
+   → Name: mental-health-predictor
+   → Environment: Python 3
+   → Build Command: pip install -r requirements.txt
+   → Start Command: gunicorn app:app
+   → Plan: Free
+
+STEP 5: ADD SECRET KEY
+   → Environment Variables → Add
+   → Key: SECRET_KEY
+   → Value: Generate with: python -c "import secrets; print(secrets.token_hex(32))"
+
+STEP 6: DEPLOY
+   → Click "Create Web Service"
+   → Wait 5-10 minutes
+   → Done! Your app is live!
+
+================================================================================
+                            YOUR APP WILL BE AT:
+================================================================================
+
+https://mental-health-predictor.onrender.com
+
+(Replace with your actual service name)
+
+================================================================================
+                            FILES TO READ:
+================================================================================
+
+📄 RENDER_QUICK_START.md
+   → 5-minute quick guide (START HERE!)
+
+📄 RENDER_DEPLOY.md
+   → Complete detailed guide with troubleshooting
+
+📄 SIMPLE_GUIDE.md
+   → How to push code to GitHub first
+
+================================================================================
+                            QUICK REFERENCE:
+================================================================================
+
+Generate Secret Key:
+   python -c "import secrets; print(secrets.token_hex(32))"
+
+Update App:
+   git add .
+   git commit -m "Update"
+   git push origin main
+
+================================================================================

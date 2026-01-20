@@ -1,0 +1,112 @@
+/* Basic layout */
+body{font-family:Segoe UI, Roboto, Arial, sans-serif;background:#f5f7fb;color:#222;margin:0;padding:20px}
+.container{max-width:740px;margin:28px auto;padding:22px;background:#fff;border-radius:8px;box-shadow:0 6px 20px rgba(30,40,50,0.06)}
+h2{margin-top:0;color:#0b2b4a}
+
+/* Form */
+.survey-form label{display:block;margin:12px 0 6px;font-weight:600;color:#243b53}
+.survey-form .field, .survey-form select{width:100%;padding:10px;border:1px solid #d6e1ee;border-radius:6px;background:#fcfeff}
+.survey-form .field:focus, .survey-form select:focus{outline:none;border-color:#6ea8ff;box-shadow:0 0 0 3px rgba(110,168,255,0.12)}
+.btn{display:inline-block;margin-top:16px;padding:10px 16px;background:#2563eb;color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:600}
+.btn:hover{background:#1e4fd1}
+
+/* Result */
+.result{padding:16px;border-radius:8px;margin-top:6px;border:1px solid #e6eef9;background:#f8fbff}
+.result h3{margin:0 0 6px}
+.result .raw{font-size:0.9rem;color:#556d85}
+
+.awareness{margin-top:14px;padding:14px;border-radius:8px;background:#fff8e6;border:1px solid #fff0c9}
+.awareness h4{margin:0 0 6px}
+
+/* Inputs section */
+.inputs{margin-top:14px;padding:14px;border-radius:8px;background:#f0f8ff;border:1px solid #d1ecf1}
+.inputs h4{margin:0 0 6px}
+.inputs ul{list-style:none;padding:0}
+.inputs li{margin:4px 0}
+
+/* Risk colors */
+.low-risk{color:#106e3e}
+.moderate-risk{color:#b86b00}
+.high-risk{color:#9b1b1b}
+
+/* Responsive */
+@media(max-width:640px){.container{padding:16px}}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #f4f7fb;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: #ffffff;
+    width: 420px;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #43a047;
+}
+
+.result {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+    color: #2e7d32;
+}
+
+a {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #1e88e5;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

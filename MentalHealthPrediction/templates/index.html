@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mental Health Assessment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>label{display:block;margin-top:8px;} input, select{width:100%;padding:6px;margin-top:4px}</style>
+</head>
+<body>
+
+<div class="container">
+    {% if current_user.is_authenticated %}
+        <p>Welcome, {{ current_user.username }}!</p>
+    {% else %}
+        <p><a href="{{ url_for('login') }}">Login</a> | <a href="{{ url_for('signup') }}">Sign Up</a></p>
+    {% endif %}
+
+    <h2>Student Mental Health Assessment</h2>
+
+    <form action="/predict" method="post" class="survey-form">
+
+        <label>Gender</label>
+        <select class="field" name="Gender" required>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+
+        <label>Age</label>
+        <input class="field" type="number" name="Age" min="10" max="100" required>
+
+        <!-- Removed City and Profession inputs as requested -->
+
+        <label>Academic Pressure (1–5)</label>
+        <input class="field" type="number" name="Academic Pressure" min="1" max="5" required>
+
+        <label>Work Pressure (1–5)</label>
+        <input class="field" type="number" name="Work Pressure" min="1" max="5" required>
+
+        <label>CGPA (e.g., 8.5)</label>
+        <input class="field" type="number" step="0.01" name="CGPA" min="0" max="10" required>
+
+        <!-- Removed Study Satisfaction as requested -->
+
+        <label>Sleep Duration</label>
+        <select class="field" name="Sleep Duration">
+            <option>7-8 hours</option>
+            <option>Less than 5 hours</option>
+            <option>More than 8 hours</option>
+            <option>Others</option>
+        </select>
+
+        <!-- Dietary Habits removed as requested -->
+
+        <label>Degree</label>
+        <input class="field" type="text" name="Degree" placeholder="e.g., B.Tech">
+
+        <!-- Suicidal thoughts question removed as requested -->
+
+        <label>Work/Study Hours (per day)</label>
+        <input class="field" type="number" name="Work/Study Hours" min="0" max="24" step="0.5">
+
+        <label>Financial Stress (1–5)</label>
+        <input class="field" type="number" name="Financial Stress" min="1" max="5">
+
+        <!-- Removed Family History of Mental Illness as requested -->
+
+        <button class="btn" type="submit">Predict Mental Health</button>
+    </form>
+</div>
+
+</body>
+</html>

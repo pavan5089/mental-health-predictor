@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Prediction Result</h2>
+    <div class="result">
+        <h3 class="{{ risk_label.replace(' ', '-').lower() }}">{{ risk_label }}</h3>
+        <p class="raw">Model output: {{ prediction }}</p>
+        {% if probability is not none %}
+            <p><strong>Risk probability:</strong> {{ '%.1f'|format(probability*100) }}%</p>
+        {% endif %}
+    </div>
+
+    <div class="awareness">
+        <h4>What this means</h4>
+        <p>{{ awareness }}</p>
+        {% if probability is not none %}
+            {% if probability < 0.33 %}
+                <p><strong>Suggestion:</strong> Keep up regular sleep, exercise, and social activities. Monitor mood and reach out early if things change.</p>
+            {% elif probability < 0.66 %}
+                <p><strong>Suggestion:</strong> Consider speaking with a counselor or trusted person, increase self-care routines, and track stressors. If symptoms persist, seek professional help.</p>
+            {% else %}
+                <p><strong>Suggestion:</strong> Please reach out to a mental health professional soon. If you're in immediate danger, contact emergency services. Consider contacting your school's counseling center or a crisis line.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <div class="inputs">
+        <h4>Your Inputs</h4>
+        <ul>
+        {% for key, value in inputs.items() %}
+            {% if key not in ['Study Satisfaction', 'Family History of Mental Illness'] %}
+                <li><strong>{{ key }}:</strong> {{ value }}</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
+
+    <a class="btn" href="{{ url_for('dashboard') }}">Go Back to Dashboard</a>
+</div>
+
+</body>
+</html>

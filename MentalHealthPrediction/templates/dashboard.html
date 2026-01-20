@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Mental Health Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Fixed Top Navbar -->
+    <nav class="top-navbar">
+        <div class="navbar-content">
+            <div class="navbar-left">
+                <div class="logo-container">
+                    <i class="fas fa-brain logo-icon"></i>
+                    <span class="project-title">Mental Health Predictor</span>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <div class="user-profile-menu">
+                    <i class="fas fa-user-circle user-icon"></i>
+                    <span class="username-text">{{ current_user.username }}</span>
+                    <a href="{{ url_for('logout') }}" class="logout-link">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-wrapper">
+        <!-- Left Sidebar -->
+        <aside class="left-sidebar">
+            <nav class="sidebar-nav">
+                <a href="{{ url_for('dashboard') }}" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="{{ url_for('home') }}" class="nav-link">
+                    <i class="fas fa-clipboard-check"></i>
+                    <span>Assessment</span>
+                </a>
+                <a href="{{ url_for('history') }}" class="nav-link">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </a>
+                <a href="{{ url_for('resources') }}" class="nav-link">
+                    <i class="fas fa-book-medical"></i>
+                    <span>Mental Health Resources</span>
+                </a>
+                <a href="{{ url_for('settings') }}" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content-area">
+            <div class="content-header">
+                <h1 class="welcome-title">Welcome, {{ current_user.username }}!</h1>
+                <p class="welcome-subtitle">Here's your mental health overview</p>
+            </div>
+
+            <!-- Risk Levels Card -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-bar"></i> Risk Levels
+                    </h3>
+                    <button class="card-menu-btn">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <canvas id="riskChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Recent Predictions Card -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-list-alt"></i> Recent Predictions
+                    </h3>
+                </div>
+                <div class="card-body">
+                    {% if recent_predictions %}
+                    <div class="predictions-table-wrapper">
+                        <table class="predictions-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Risk Level</th>
+                                    <th>Probability</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for pred in recent_predictions %}
+                                <tr>
+                                    <td>{{ pred.timestamp }}</td>
+                                    <td>
+                                        {% if 'Low' in pred.risk or 'low' in pred.risk.lower() %}
+                                        <span class="risk-badge risk-low">
+                                            <i class="fas fa-check-circle"></i> {{ pred.risk }}
+                                        </span>
+                                        {% elif 'Moderate' in pred.risk or 'moderate' in pred.risk.lower() %}
+                                        <span class="risk-badge risk-moderate">
+                                            <i class="fas fa-exclamation-triangle"></i> {{ pred.risk }}
+                                        </span>
+                                        {% elif 'High' in pred.risk or 'high' in pred.risk.lower() %}
+                                        <span class="risk-badge risk-high">
+                                            <i class="fas fa-exclamation-circle"></i> {{ pred.risk }}
+                                        </span>
+                                        {% else %}
+                                        <span class="risk-badge risk-low">{{ pred.risk }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if pred.probability %}
+                                        <span class="probability-value">{{ "%.1f"|format(pred.probability * 100) }}%</span>
+                                        {% else %}
+                                        <span class="probability-value">N/A</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="action-btn view-details-btn" title="View Details" data-timestamp="{{ pred.timestamp }}" data-risk="{{ pred.risk }}" data-probability="{{ pred.probability if pred.probability else 'N/A' }}" data-summary="{{ pred.summary }}">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="action-btn share-btn" title="Share" data-timestamp="{{ pred.timestamp }}" data-risk="{{ pred.risk }}" data-probability="{{ pred.probability if pred.probability else 'N/A' }}">
+                                                <i class="fas fa-share-alt"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <p>No predictions yet.</p>
+                        <a href="{{ url_for('home') }}" class="btn-primary">
+                            <i class="fas fa-plus"></i> Start Your First Assessment
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Quick Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card stat-primary">
+                    <div class="stat-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h4>Total Assessments</h4>
+                        <p class="stat-value">{{ recent_predictions|length }}</p>
+                    </div>
+                </div>
+                <div class="stat-card stat-success">
+                    <div class="stat-icon">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h4>Wellness Score</h4>
+                        <p class="stat-value">Good</p>
+                    </div>
+                </div>
+                <div class="stat-card stat-warning">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h4>Last Assessment</h4>
+                        <p class="stat-value">
+                            {% if recent_predictions %}
+                                {{ recent_predictions[-1].timestamp.split(' ')[0] }}
+                            {% else %}
+                                Never
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Fixed Footer -->
+    <footer class="dashboard-footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>&copy; 2026 Mental Health Predictor. All rights reserved.</p>
+            </div>
+            <div class="footer-right">
+                <a href="#privacy">Privacy Policy</a>
+                <span>|</span>
+                <a href="#terms">Terms of Service</a>
+                <span>|</span>
+                <a href="#contact">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Risk Levels Chart
+        const riskCtx = document.getElementById('riskChart');
+        if (riskCtx) {
+            const recentPreds = {{ recent_predictions|tojson }};
+            
+            if (recentPreds && recentPreds.length > 0) {
+                // Get last 4 predictions for the chart
+                const chartData = recentPreds.slice(-4).reverse();
+                
+                const labels = chartData.map(p => {
+                    if (p.timestamp) {
+                        const date = p.timestamp.split(' ')[0];
+                        const dateParts = date.split('-');
+                        if (dateParts.length >= 3) {
+                            return dateParts[2]; // Day only
+                        }
+                    }
+                    return '';
+                });
+                
+                const values = chartData.map(p => {
+                    if (p.probability !== null && p.probability !== undefined) {
+                        // Scale probability (0-1) to 0-20 range
+                        return Math.round(p.probability * 20);
+                    }
+                    // Map risk level to value if probability not available
+                    const risk = (p.risk || '').toLowerCase();
+                    if (risk.includes('low')) return 17;
+                    if (risk.includes('moderate')) return 19;
+                    if (risk.includes('high')) return 20;
+                    return 18;
+                });
+                
+                const colors = chartData.map(p => {
+                    const risk = (p.risk || '').toLowerCase();
+                    if (risk.includes('low')) return '#10b981'; // green
+                    if (risk.includes('moderate')) return '#f59e0b'; // orange
+                    if (risk.includes('high')) return '#ef4444'; // red
+                    return '#6b7280'; // gray
+                });
+                
+                new Chart(riskCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Risk Level',
+                            data: values,
+                            backgroundColor: colors,
+                            borderRadius: 8,
+                            borderSkipped: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const index = context.dataIndex;
+                                        const pred = chartData[index];
+                                        const risk = pred.risk || 'Unknown';
+                                        const prob = pred.probability ? (pred.probability * 100).toFixed(1) + '%' : 'N/A';
+                                        return `Risk: ${risk} (${prob})`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 20,
+                                ticks: {
+                                    stepSize: 2
+                                },
+                                grid: {
+                                    color: '#e5e7eb'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            } else {
+                riskCtx.parentElement.innerHTML = '<div class="empty-state"><i class="fas fa-chart-bar"></i><p>No data available for chart. Complete an assessment to see your risk levels.</p></div>';
+            }
+        }
+
+        // View Details functionality
+        document.querySelectorAll('.view-details-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const timestamp = this.getAttribute('data-timestamp');
+                const risk = this.getAttribute('data-risk');
+                const probability = this.getAttribute('data-probability');
+                const summary = this.getAttribute('data-summary');
+                
+                let message = `Prediction Details:\n\n`;
+                message += `Date: ${timestamp}\n`;
+                message += `Risk Level: ${risk}\n`;
+                message += `Probability: ${probability}%\n`;
+                if (summary) {
+                    message += `Summary: ${summary}\n`;
+                }
+                
+                alert(message);
+            });
+        });
+
+        // Share functionality
+        document.querySelectorAll('.share-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const timestamp = this.getAttribute('data-timestamp');
+                const risk = this.getAttribute('data-risk');
+                const probability = this.getAttribute('data-probability');
+                
+                const shareText = `My Mental Health Assessment Result:\nDate: ${timestamp}\nRisk Level: ${risk}\nProbability: ${probability}%`;
+                
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Mental Health Assessment Result',
+                        text: shareText
+                    }).catch(err => {
+                        console.log('Error sharing:', err);
+                        copyToClipboard(shareText);
+                    });
+                } else {
+                    copyToClipboard(shareText);
+                }
+            });
+        });
+
+        // Copy to clipboard function
+        function copyToClipboard(text) {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('Details copied to clipboard!');
+                }).catch(err => {
+                    console.log('Error copying:', err);
+                    fallbackCopy(text);
+                });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                alert('Details copied to clipboard!');
+            } catch (err) {
+                alert('Unable to copy. Please copy manually:\n\n' + text);
+            }
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>

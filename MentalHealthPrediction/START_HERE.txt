@@ -1,0 +1,90 @@
+================================================================================
+                    MENTAL HEALTH PREDICTOR - DEPLOYMENT GUIDE
+================================================================================
+
+📋 WHAT YOU NEED TO DO - SIMPLE STEPS:
+
+1. READ THIS FILE FIRST: SIMPLE_GUIDE.md
+   → This has the easiest step-by-step instructions
+
+2. CREATE GITHUB ACCOUNT (if you don't have one)
+   → Go to: https://github.com
+   → Sign up for free
+
+3. CREATE REPOSITORY ON GITHUB
+   → Click "+" button → "New repository"
+   → Name it: mental-health-predictor
+   → Don't check "Add README"
+   → Click "Create repository"
+
+4. GET PERSONAL ACCESS TOKEN
+   → GitHub → Settings → Developer settings
+   → Personal access tokens → Tokens (classic)
+   → Generate new token
+   → Check "repo" scope
+   → Copy the token (save it!)
+
+5. PUSH YOUR CODE
+   → Open Command Prompt in this folder
+   → Run these commands:
+
+   git init
+   git add .
+   git commit -m "First commit"
+   git remote add origin https://github.com/YOUR_USERNAME/mental-health-predictor.git
+   git branch -M main
+   git push -u origin main
+
+   → When asked for password, paste your TOKEN (not password!)
+
+6. VERIFY
+   → Go to your GitHub repository
+   → You should see all your files
+
+7. DEPLOY
+   → Read DEPLOY_STEPS.md
+   → Follow instructions to deploy on Render.com
+
+================================================================================
+                            FILE GUIDE
+================================================================================
+
+📄 START_HERE.txt (this file)
+   → Quick overview
+
+📄 SIMPLE_GUIDE.md
+   → EASIEST TO FOLLOW - Read this first!
+   → Step-by-step with explanations
+
+📄 PUSH_TO_GITHUB.md
+   → Detailed guide for pushing to GitHub
+
+📄 DEPLOY_STEPS.md
+   → How to deploy your app after pushing to GitHub
+
+📄 DEPLOYMENT_GUIDE.md
+   → Complete deployment reference
+
+📄 QUICK_DEPLOY.md
+   → Quick reference for deployment
+
+📄 GITHUB_SETUP.md
+   → GitHub setup instructions
+
+📄 PUSH_TO_GITHUB.bat
+   → Double-click to run automated script
+
+================================================================================
+                            QUICK START
+================================================================================
+
+EASIEST WAY:
+1. Double-click: PUSH_TO_GITHUB.bat
+2. Follow the instructions it shows
+3. Create GitHub repository first
+4. Use Personal Access Token when asked
+
+OR READ:
+→ Open SIMPLE_GUIDE.md and follow step by step
+
+================================================================================

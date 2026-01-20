@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Mental Health Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Fixed Top Navbar -->
+    <nav class="top-navbar">
+        <div class="navbar-content">
+            <div class="navbar-left">
+                <div class="logo-container">
+                    <i class="fas fa-brain logo-icon"></i>
+                    <span class="project-title">Mental Health Predictor</span>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <div class="user-profile-menu">
+                    <i class="fas fa-user-circle user-icon"></i>
+                    <span class="username-text">{{ current_user.username }}</span>
+                    <a href="{{ url_for('logout') }}" class="logout-link">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-wrapper">
+        <!-- Left Sidebar -->
+        <aside class="left-sidebar">
+            <nav class="sidebar-nav">
+                <a href="{{ url_for('dashboard') }}" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="{{ url_for('home') }}" class="nav-link">
+                    <i class="fas fa-clipboard-check"></i>
+                    <span>Assessment</span>
+                </a>
+                <a href="{{ url_for('history') }}" class="nav-link">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </a>
+                <a href="{{ url_for('resources') }}" class="nav-link active">
+                    <i class="fas fa-book-medical"></i>
+                    <span>Mental Health Resources</span>
+                </a>
+                <a href="{{ url_for('settings') }}" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content-area">
+            <div class="content-header">
+                <h1 class="welcome-title">Mental Health Resources</h1>
+                <p class="welcome-subtitle">Get help and support when you need it</p>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-globe"></i> Online Resources
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="resources-list">
+                        <a href="https://www.who.int/health-topics/mental-disorders" target="_blank" class="resource-link">
+                            <i class="fas fa-link"></i>
+                            <div>
+                                <h4>WHO Mental Health</h4>
+                                <p>World Health Organization mental health information</p>
+                            </div>
+                        </a>
+                        <a href="https://www.nami.org/" target="_blank" class="resource-link">
+                            <i class="fas fa-link"></i>
+                            <div>
+                                <h4>NAMI</h4>
+                                <p>National Alliance on Mental Illness</p>
+                            </div>
+                        </a>
+                        <a href="https://www.mind.org.uk/" target="_blank" class="resource-link">
+                            <i class="fas fa-link"></i>
+                            <div>
+                                <h4>Mind (UK)</h4>
+                                <p>Mental health charity</p>
+                            </div>
+                        </a>
+                        <a href="https://www.mentalhealth.gov/" target="_blank" class="resource-link">
+                            <i class="fas fa-link"></i>
+                            <div>
+                                <h4>MentalHealth.gov</h4>
+                                <p>U.S. government mental health resources</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Fixed Footer -->
+    <footer class="dashboard-footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>&copy; 2026 Mental Health Predictor. All rights reserved.</p>
+            </div>
+            <div class="footer-right">
+                <a href="#privacy">Privacy Policy</a>
+                <span>|</span>
+                <a href="#terms">Terms of Service</a>
+                <span>|</span>
+                <a href="#contact">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
