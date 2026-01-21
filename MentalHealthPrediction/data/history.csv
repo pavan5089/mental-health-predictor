@@ -19,3 +19,4 @@ timestamp,probability,risk_label,summary
 2,1768941419,0.503638566977863,Moderate Risk,Academic Pressure=3.0,Work Pressure=2.0,Study Satisfaction=0,Financial Stress=3.0
 2,1768942171,0.6899891921698575,High Risk,Academic Pressure=4.0,Work Pressure=2.0,Study Satisfaction=0,Financial Stress=4.0
 2,1768942256,0.5007990915810477,Moderate Risk,Academic Pressure=3.0,Work Pressure=3.0,Study Satisfaction=0,Financial Stress=3.0
+2,1768949975,0.1438286947876141,Low Risk,Academic Pressure=1.0,Work Pressure=1.0,Study Satisfaction=0,Financial Stress=2.0

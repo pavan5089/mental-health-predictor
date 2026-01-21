@@ -1,0 +1,84 @@
+================================================================================
+              DEPLOY TO RENDER - SIMPLE STEPS (Code Already on GitHub)
+================================================================================
+
+✅ YOUR CODE IS ON GITHUB - NOW DEPLOY TO RENDER:
+
+STEP 1: SIGN UP ON RENDER
+   → Go to: https://render.com
+   → Click "Get Started for Free"
+   → Sign up with GitHub (easiest!)
+
+STEP 2: CREATE WEB SERVICE
+   → Click "New +" → "Web Service"
+   → Select your repository: mental-health-predictor
+   → Click "Connect"
+
+STEP 3: CONFIGURE (Copy these exactly)
+   → Name: mental-health-predictor
+   → Environment: Python 3
+   → Build Command: pip install -r requirements.txt
+   → Start Command: gunicorn app:app
+   → Plan: Free
+
+STEP 4: ADD SECRET KEY
+   → Scroll to "Environment Variables"
+   → Click "Add Environment Variable"
+   → Key: SECRET_KEY
+   → Value: Generate with this command:
+      python -c "import secrets; print(secrets.token_hex(32))"
+   → Copy the output and paste as value
+
+STEP 5: DEPLOY
+   → Click "Create Web Service"
+   → Wait 5-10 minutes
+   → Watch the logs
+   → When you see "Your service is live" → DONE! ✅
+
+================================================================================
+                            YOUR APP WILL BE AT:
+================================================================================
+
+https://mental-health-predictor.onrender.com
+
+(Replace with your actual service name)
+
+================================================================================
+                            QUICK COMMANDS:
+================================================================================
+
+Generate Secret Key:
+   python -c "import secrets; print(secrets.token_hex(32))"
+
+Update App Later:
+   git add .
+   git commit -m "Update"
+   git push origin main
+
+================================================================================
+                            TROUBLESHOOTING:
+================================================================================
+
+Build Failed?
+   → Check "Logs" tab for errors
+   → Make sure requirements.txt has all packages
+
+App Crashes?
+   → Check SECRET_KEY is set
+   → View logs for Python errors
+
+Slow Loading?
+   → Normal on free tier (spins down after 15 min)
+   → First request takes ~30 seconds
+
+================================================================================
+                            READ FOR DETAILS:
+================================================================================
+
+📄 RENDER_DEPLOY_NOW.md
+   → Complete step-by-step guide with screenshots explanation
+
+📄 RENDER_QUICK_START.md
+   → 5-minute quick reference
+
+================================================================================
